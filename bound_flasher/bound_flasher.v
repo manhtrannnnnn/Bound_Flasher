@@ -86,35 +86,35 @@ always @(state or flick or count) begin
   	operation = IDLE;
     case(state)
         INIT: begin
-            if(count > 0) operation <= DOWN;
-            else if(flick == 1) operation <= UP;
-            else operation <= IDLE;
+            if(count > 0) operation = DOWN;
+            else if(flick == 1) operation = UP;
+            else operation = IDLE;
         end
 
         turn_on_0_15: begin
-            if(count < 15) operation <= UP;
-          else operation <= DOWN;
+            if(count < 15) operation = UP;
+          else operation = DOWN;
         end
 
         turn_off_15_5: begin
-            if(count > 5) operation <= DOWN;
-            else if (flick == 1) operation <= KICKBACK;
+            if(count > 5) operation = DOWN;
+            else if (flick == 1) operation = KICKBACK;
             else operation <= UP;
         end
 
         turn_on_5_10: begin
-            if(count < 10) operation <= UP;
-            else operation <= DOWN;
+            if(count < 10) operation = UP;
+            else operation = DOWN;
         end
 
         turn_off_10_0: begin
-            if(count > 0) operation <= DOWN;
-            else if (flick == 1) operation <= KICKBACK;
+            if(count > 0) operation = DOWN;
+            else if (flick == 1) operation = KICKBACK;
         end
 
         turn_on_0_5: begin
-            if(count < 5) operation <= UP;
-            else operation <= DOWN;
+            if(count < 5) operation = UP;
+            else operation = DOWN;
         end
 
         default: operation = IDLE;
@@ -127,12 +127,12 @@ end
 // OUTPUT
 always @(count) begin
     if(count == -1) begin
-      for(i = 0; i <= 15; i = i + 1) LED[i] <= 1'b0;
+      for(i = 0; i <= 15; i = i + 1) LED[i] = 1'b0;
     end
   else begin 
         for(i = 0; i <= 15; i = i + 1) begin
-            if(i <= count) LED[i] <= 1'b1;
-            else LED[i] <= 1'b0;
+            if(i <= count) LED[i] = 1'b1;
+            else LED[i] = 1'b0;
         end
     end
 end
